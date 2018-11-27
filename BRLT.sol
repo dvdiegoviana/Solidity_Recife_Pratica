@@ -71,10 +71,7 @@ contract BRLT is EIP20Interface {
     }
     
     function createTokens(address _receiver, uint256 _value) public returns (bool success) {
-        if(msg.sender != printerAuthority) {
-            return false;
-        }
-        
+        require(msg.sender != printerAuthority);
         totalSupply += _value;
         balances[_receiver] += _value;
         
@@ -82,11 +79,7 @@ contract BRLT is EIP20Interface {
     }
     
     function burnTokens(uint256 _value) public returns (bool success) {
-        if(msg.sender != printerAuthority) {
-            return false;
-        }
-        
-        require(balances[msg.sender] >= _value);
+        require (msg.sender != printerAuthority && balances[msg.sender] >= _value));
         
         balances[msg.sender] -= _value;
         totalSupply -= _value;

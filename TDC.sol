@@ -48,6 +48,7 @@ contract TDC is EIP20Interface {
             decimals = _decimalUnits;                            // Amount of decimals for display purposes
             symbol = _tokenSymbol;                               // Set the symbol for display purposes
             nextSaleID = 5000;
+            escrow = msg.sender:
         }
     
         function transfer(address _to, uint256 _value) public returns (bool success) {
@@ -96,6 +97,7 @@ contract TDC is EIP20Interface {
         function getSaleValueById(uint256 _id) public returns (uint256 value, address seller, address buyer) {
             return (pendingSales[_id].value, pendingSales[_id].seller, pendingSales[_id].buyer);
         }
+        
         /*
         function authorizePayment(uint256 saleID) public returns (bool success) {
             return false;
